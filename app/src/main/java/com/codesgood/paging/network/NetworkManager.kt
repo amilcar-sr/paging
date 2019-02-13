@@ -36,7 +36,7 @@ class NetworkManager {
         }
 
         fun getPopularMoviesPage(page: Int): MovieListResponse? {
-            return apiService.getMovies(page).execute().body()
+            return apiService.getPopularMovies(page).execute().body()
         }
     }
 }

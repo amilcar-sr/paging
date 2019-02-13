@@ -26,6 +26,7 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(DIFF_
     }
 
     companion object {
+        //Needed by PagedListAdapter to compare items and identify content changes.
         private val DIFF_CALLBACK = object :
             DiffUtil.ItemCallback<Movie>() {
             // The ID property identifies when items are the same.
@@ -39,13 +40,18 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(DIFF_
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        /**
+         * Binds the item view to a Movie
+         */
         fun bindTo(movie: Movie?) {
             val context = itemView.context
             val glide = Glide.with(context)
+
+            //Movie loaded properly
             if (movie != null) {
                 itemView.movie_name.text = movie.title
                 glide.load(NetworkManager.BASE_IMAGE_URL + movie.posterPath).into(itemView.movie_poster)
-            } else {
+            } else { //Object is null, so it's a placeholder
                 itemView.movie_name.text = context.getString(R.string.loading)
                 glide.load(R.drawable.popcorn_placeholder).into(itemView.movie_poster)
             }

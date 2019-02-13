@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val popularMoviesFragment = supportFragmentManager.findFragmentByTag(PopularMoviesFragment.TAG)
 
+        //We replace the fragment_container with the instance of PopularMoviesFragment we already had, or create a new one in case its null.
         supportFragmentManager
             .beginTransaction()
             .replace(

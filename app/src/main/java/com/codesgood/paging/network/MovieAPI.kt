@@ -7,7 +7,9 @@ import retrofit2.http.Query
 
 interface MovieAPI {
 
+    /**
+     * Popular movies endpoint/call
+     */
     @GET("movie/popular")
-    fun getMovies(@Query("page") page: Int): Call<MovieListResponse>
-
+    fun getPopularMovies(@Query("page") page: Int): Call<MovieListResponse>
 }
