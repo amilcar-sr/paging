@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Paging</string>
+    <string name="movie_poster_description">Movie Poster</string>
+    <string name="loading">Loading...</string>
+</resources>
