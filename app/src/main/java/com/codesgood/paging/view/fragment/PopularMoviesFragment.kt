@@ -19,13 +19,16 @@ class PopularMoviesFragment : Fragment() {
         const val TAG = "PopularMoviesFragment"
     }
 
-    private val adapter = MovieAdapter()
-    private lateinit var viewModel: MovieViewModel
+    private val movieAdapter = MovieAdapter()
+    private lateinit var moviewViewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-        viewModel.getPopularMovies().observe(this, Observer { adapter.submitList(it) })
+        //Getting the ViewModel that contains our DataSource
+        moviewViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+
+        //Starts observing changes on the movies DataSource
+        moviewViewModel.getPopularMovies().observe(this, Observer { movieAdapter.submitList(it) })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,7 +37,9 @@ class PopularMoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Setting up our RecyclerView
         movies_recycler.layoutManager = GridLayoutManager(context, 2)
-        movies_recycler.adapter = adapter
+        movies_recycler.adapter = movieAdapter
     }
 }
