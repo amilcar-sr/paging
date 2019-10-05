@@ -11,11 +11,13 @@ class MovieSource : PageKeyedDataSource<Int, Movie>() {
      */
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Movie>) {
         //Requesting the first page (the Movie API doesn't start with 0 for some reason)
-        val movies = NetworkManager.getPopularMoviesPage(1)
+        val moviePageResponse = NetworkManager.getPopularMoviesPage(1)
 
-        //Returning movies retrieved from endpoint, null in the 2nd param because there is no previous page,
-        //and the next page number in the 3rd param
-        callback.onResult(movies!!.results.toMutableList(), null, movies.page + 1)
+        moviePageResponse?.let {
+            //Returning movies retrieved from endpoint, null in the 2nd param because there is no previous page,
+            //and the next page number in the 3rd param
+            callback.onResult(it.results.toMutableList(), null, it.page + 1)
+        }
     }
 
     /**
@@ -25,13 +27,13 @@ class MovieSource : PageKeyedDataSource<Int, Movie>() {
         //Requesting next page of movies
         val moviePageResponse = NetworkManager.getPopularMoviesPage(params.key)
 
-        if (moviePageResponse != null) {
-            val isLastPage = params.key >= moviePageResponse.totalPages
-            val movies = moviePageResponse.results.toMutableList()
+        moviePageResponse?.let {
+            val isLastPage = params.key >= it.totalPages
+            val movies = it.results.toMutableList()
 
             //Returning movies retrieved from endpoint and pass NULL as 2nd param if this is the last page
             //next page number otherwise
-            callback.onResult(movies, if (isLastPage) null else moviePageResponse.page + 1)
+            callback.onResult(movies, if (isLastPage) null else it.page + 1)
         }
     }
 
@@ -42,13 +44,13 @@ class MovieSource : PageKeyedDataSource<Int, Movie>() {
         //Requesting previous page of movies
         val moviePageResponse = NetworkManager.getPopularMoviesPage(params.key)
 
-        if (moviePageResponse != null) {
+        moviePageResponse?.let {
             val isFirstPage = params.key == 1
-            val movies = moviePageResponse.results.toMutableList()
+            val movies = it.results.toMutableList()
 
             //Returning movies retrieved from endpoint and pass NULL as 2nd param if this is the first page
             //previous page number otherwise
-            callback.onResult(movies, if (isFirstPage) null else moviePageResponse.page - 1)
+            callback.onResult(movies, if (isFirstPage) null else it.page - 1)
         }
     }
 }

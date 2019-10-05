@@ -9,7 +9,7 @@ import com.codesgood.paging.network.sourcefactory.MovieSourceFactory
 
 class MovieViewModel : ViewModel() {
 
-    //We hold this LiveData to make sure we use the same MovieSource instead of crating new ones unnecessarily
+    //We hold this LiveData to make sure we use the same MovieSource instead of creating new ones unnecessarily
     private lateinit var movies: LiveData<PagedList<Movie>>
 
     /**

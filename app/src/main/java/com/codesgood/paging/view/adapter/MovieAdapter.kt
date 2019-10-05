@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
+        return MovieViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
