@@ -22,4 +22,4 @@ In case you want to read the documentation I read in order to make this sample (
 - [Data Considerations](https://developer.android.com/topic/libraries/architecture/paging/data#custom-data-source)
 - [PagedListAdapter](https://developer.android.com/reference/android/arch/paging/PagedListAdapter)
 - [Paging Dependency for Android X](https://developer.android.com/jetpack/androidx/releases/paging)
-- [API Endpoint](https://developers.themoviedb.org/3/movies/get-movie-details)
+- [API Endpoint](https://developers.themoviedb.org/3/movies/get-popular-movies)
