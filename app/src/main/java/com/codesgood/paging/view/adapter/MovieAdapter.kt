@@ -7,6 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.codesgood.paging.R
 import com.codesgood.paging.model.Movie
 import com.codesgood.paging.network.NetworkManager
@@ -51,10 +52,14 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(DIFF_
             //Movie loaded properly
             if (movie != null) {
                 itemView.movie_name.text = movie.title
-                glide.load(NetworkManager.BASE_IMAGE_URL + movie.posterPath).into(itemView.movie_poster)
+                glide.load(NetworkManager.BASE_IMAGE_URL + movie.posterPath)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(itemView.movie_poster)
             } else { //Object is null, so it's a placeholder
                 itemView.movie_name.text = context.getString(R.string.loading)
-                glide.load(R.drawable.popcorn_placeholder).into(itemView.movie_poster)
+                glide.load(R.drawable.popcorn_placeholder)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(itemView.movie_poster)
             }
         }
     }

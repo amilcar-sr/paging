@@ -18,7 +18,7 @@ class NetworkManager {
         private const val BASE_API_URL = "https://api.themoviedb.org/3/"
 
         //Base URL of images retrieved by The Movie Database API
-        const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185"
+        const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
 
         //Singleton instance of the API service
         private lateinit var apiService: MovieAPI
